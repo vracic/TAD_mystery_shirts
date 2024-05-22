@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('packages', function (Blueprint $table) {
-            $table->decimal('price', 8, 2)->after('type');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->boolean('sent')->default(false);
+            $table->json('items');
+            $table->unsignedBigInteger('user_id')->nullable(true);
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('packages', function (Blueprint $table) {
-            $table->dropColumn('price');
-        });
+        Schema::dropIfExists('orders');
     }
 };

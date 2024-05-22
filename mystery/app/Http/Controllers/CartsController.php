@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Package;
 use App\Models\Shirt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class CartsController extends Controller
 {
@@ -24,31 +27,16 @@ class CartsController extends Controller
 
         // Fetch the package
         $package = Package::findOrFail($request->package_id);
-
-        // Select a random shirt of the specified type and size
-        $shirt = Shirt::where('type', $package->type)
-                      ->where('size', $request->size)
-                      ->inRandomOrder()
-                      ->first();
-
-        if (!$shirt) {
-            return redirect()->back()->with('error', 'No shirts available in the selected size.');
-        }
-
+        
+        $item = [
+            'type' => $package->type,
+            'size' => $request->size
+        ];
+        
         // Create the cart session if not exists
         $cart = session()->get('cart', []);
 
-        // Add or update the package in the cart
-        if (isset($cart[$package->id])) {
-            $cart[$package->id]['quantity']++;
-        } else {
-            $cart[$package->id] = [
-                "name" => $package->name,
-                "quantity" => 1,
-                "shirt_id" => $shirt->id,
-                "size" => $request->size
-            ];
-        }
+        $cart[] = $item;
 
         session()->put('cart', $cart);
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
@@ -56,7 +44,7 @@ class CartsController extends Controller
 
     public function destroy($id)
     {
-        $cart = session()->get('cart');
+        $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
             unset($cart[$id]);
@@ -64,5 +52,21 @@ class CartsController extends Controller
         }
 
         return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
+    }
+
+    public function checkout()
+    {
+        $cart = session()->get('cart', []);
+        $userId = auth()->id();
+
+        $order = new Order();
+        $order->user_id = $userId; 
+        $order->items = $cart;
+        $order->save();
+        
+        //send email
+
+        session()->forget('cart');
+        return redirect()->route('cart.index')->with('success', 'Checkout complete!');
     }
 }
