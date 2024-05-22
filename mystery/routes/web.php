@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ShirtsController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     
     Route::get('cart', [CartsController::class, 'index'])->name('cart.index');
     Route::post('cart', [CartsController::class, 'store'])->name('cart.store');
-    Route::delete('cart/{package}', [CartsController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/cart/remove/{index}', [CartController::class, 'removeItem'])->name('cart.remove');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -27,11 +30,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('packages/edit/{id}', [ PackagesController::class, 'edit' ]) -> name('packages.edit'); 
     Route::put('packages/edit/{id}', [ PackagesController::class, 'update' ]) -> name('packages.update');
     Route::delete('packages/delete/{id}', [ PackagesController::class, 'delete' ]) -> name('packages.delete');
-
-    Route::post('shirts', [ShirtsController::class,'crear'])->name('shirts.create');
-    Route::get('shirts/edit/{id}', [ ShirtsController::class, 'edit' ]) -> name('shirts.edit'); 
-    Route::put('shirts/edit/{id}', [ ShirtsController::class, 'update' ]) -> name('shirts.update');
-    Route::delete('shirts/delete/{id}', [ ShirtsController::class, 'delete' ]) -> name('shirts.delete');
 
     Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
     Route::get('/orders/unsent', [OrdersController::class, 'unsentOrders'])->name('orders.unsent');

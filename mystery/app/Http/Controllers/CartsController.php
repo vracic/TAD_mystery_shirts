@@ -42,22 +42,26 @@ class CartsController extends Controller
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
 
-    public function destroy($id)
-    {
-        $cart = session()->get('cart', []);
+    public function removeItem($index)
+{
+    $cart = session()->get('cart', []);
 
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-        }
-
-        return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
+    if (isset($cart[$index])) {
+        unset($cart[$index]);
+        session()->put('cart', $cart);
+        return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
     }
 
+    return redirect()->route('cart.index')->with('error', 'Item not found in cart.');
+}
     public function checkout()
     {
         $cart = session()->get('cart', []);
         $userId = auth()->id();
+
+        if (empty($cart)) {
+            return back() -> with('message', 'Your cart is empty!');
+        }
 
         $order = new Order();
         $order->user_id = $userId; 
