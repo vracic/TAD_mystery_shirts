@@ -1,0 +1,404 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+  }
+  .custom-navbar{
+    background-color: #212529db !important; /* #212529*/
+    color: #fff;
+  }
+
+  body {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+  }
+
+  [id] {
+    scroll-margin-top: 84px;
+  }
+
+  @media (min-width: 992px) {
+    [id] {
+      scroll-margin-top: 69px;
+    }
+  }
+ 
+
+  .hero-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212529d4;
+    z-index: -1;
+  }
+  .orange-color {
+    color: rgb(255, 102, 0);
+  }
+  
+  .logo {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+
+  .nav-link,
+  .navbar-toggler-icon {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: white !important;
+  }
+
+  .nav-link:hover {
+    color: rgb(105, 45, 133) !important;
+  }
+
+  .active{
+    color: rgb(105, 45, 133) !important;
+  }
+  .navbar-toggler {
+    padding: 1em 2em;
+  }
+
+  #ulNAbvar{
+    margin-left: -15%;
+    font-size: 1.8rem;
+  }
+  #showBoxesBtn{
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(105, 45, 133);
+    padding: 1em 2em;
+    border-radius: 12px;
+  }
+  #showBoxesBtn:hover{
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    color: rgb(79, 13, 105);
+    background-color: rgb(209, 198, 198);
+    padding: 1em 2em;
+    border-radius: 8px;
+  }
+  .home {
+    position: relative;
+    height: 82rem;
+    background-image: url("../img/fondoFin.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .home .btn {
+    padding: 1em 2em;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+  .home .welcome-text {
+    font-size: 2.2rem;
+  }
+  
+  .aboutus-box h3 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .aboutus-icon {
+    font-size: 4rem;
+  }
+  .accordion-button {
+    padding: 1em;
+    font-size: 1.8rem;
+    background-color: rgb(248, 248, 248);
+  }
+  
+  .navbar-brand {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+    padding-left: 0.75cm;
+    color: white;
+  }
+  .navbar-brand:hover {
+    color:rgb(105, 45, 133);
+  }
+
+  button.accordion-button:not(.collapsed) {
+    color: white;
+    background-color: black;
+    box-shadow: none;
+  }
+  
+  button.accordion-button:not(.collapsed),
+  button.accordion-button:not(.open),
+  button.accordion-button:not(.collapsing) {
+    box-shadow: none;
+  }
+  /**
+   * Add chevron icon es un archivo svg que se encuentra en la carpeta img y se llama chevron-down.svg y es para el icono de flecha hacia abajo
+   
+   */
+  button.accordion-button:not(.collapsed)::after {
+    background-image: url(../img/chevron-up.svg);
+  }
+  
+  .HowItWorks {
+    background-color: rgb(248, 248, 248);
+  }
+  
+  .HowItWorks .row {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(165 139 178 / 51%);
+    padding: 2rem;
+    height: 50rem;
+  }
+  .card{
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(214, 204, 204);
+    border-radius: 15px;
+  }
+
+  .card-img-top {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    width: 100%;
+    /*centrar imagen al centro*/
+    /*margin-left: 25%;*/
+  }
+
+  /*.plan .card {
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(54 52 52);
+    border-radius: 15px;
+  }
+  
+  .plan .card:hover {
+    background-color: #f8f9fa; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s;
+  }
+  
+  .plan .card-body {
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(54 52 52);
+    border-radius: 15px;
+  }
+  .plan .card-body:hover {
+    background-color: #f8f9fa; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s;
+  }
+  
+  .plan .card-img-top {
+    height: 240px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  .plan .card-title {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    color: #aea3a3;
+  }
+  .plan .card-title:hover {
+    background-color: #f8f9fa; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s;
+    color: rgb(13, 13, 13);
+  }
+  
+  .plan .card-text {
+    font-size: 1.8rem;
+  }
+  
+  .plan .card-text-grey {
+    font-size: 1.3rem;
+    color: rgb(212, 210, 210);
+  }
+  
+  .plan .card-type {
+    font-size: 2.8rem;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(54 52 52);
+    border-radius: 6px;
+  }
+  .plan .card-type:hover {
+    background-color: #f8f9fa; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s;
+  }
+  */
+   
+  .container .py-5 {
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #212529;
+    /*background-color: rgb(217, 211, 211);*/
+    border-radius: 15px;
+    width: 100%;
+  }
+  .contact h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .contact .submit-btn {
+    font-size: 1.6rem;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 1.4rem;
+    padding: 1rem;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .bold_text_aboutus {
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: rgb(255, 102, 0);
+  }
+ 
+
+.text-info{
+  color: rgb(105, 45, 133) !important;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+  
+.purpleText{
+  color:  rgb(165 139 178) !important;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+/* Cambiar el color del ícono del botón de hamburguesa a blanco */
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255,255,255,1)" stroke-width="2" linecap="round" linejoin="round" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+}
+
+/* Asegúrate de que el botón tenga un fondo oscuro para ver el icono blanco */
+.navbar-toggler.bg-dark {
+  background-color: black;
+}
+
+/* Estilos personalizados para el botón de hamburguesa */
+.custom-toggler.navbar-toggler {
+  border-color: rgb(255, 102, 203);
+}
+
+.divImg{
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  width: 60% !important;
+  margin-left: 25% !important;
+}
+
+.accordion{
+  background-color: rgba(128, 112, 139, 0.51);
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 0 10px rgba(219, 208, 208, 0.1);
+  padding: 2rem;
+  height: 100%;
+  margin-top: 5rem;
+}
+
+.accordion-item{
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color:#cec1d4; /*background light purple*/
+}
+
+.accordion-body {
+  padding: 1rem;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+
+
+.getConnected {
+  position: relative;
+  height: 100%;
+  background-image: url("../img/fondoFin.jpg");
+  z-index: 0;
+}
+
+.getConnected h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.getConnected p.lead {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.card-contact {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(185 163 191 / 62%);
+}
+
+.card-body img {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  color: #666;
+}
+
+.hero-shadow-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f3f6d4;
+  z-index: -1;
+}
+
+.btn-primary{
+  background-color: rgb(105, 45, 133);
+  border-color: rgb(105, 45, 133);
+}
+
+.btn-primary:hover{
+  color: rgb(79, 13, 105);
+  background-color: rgb(209, 198, 198);
+  border-color: rgb(155, 139, 161);
+}
