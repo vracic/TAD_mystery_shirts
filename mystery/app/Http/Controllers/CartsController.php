@@ -63,9 +63,9 @@ class CartsController extends Controller
 
         $user = User::findOrFail($userId);
 
-        // if (empty($cart)) {
-        //     return back() -> with('message', 'Your cart is empty!');
-        // }
+        if (empty($cart)) {
+            return back() -> with('message', 'Your cart is empty!');
+        }
 
         $order = new Order();
         $order->user_id = $user->id; 
@@ -75,8 +75,6 @@ class CartsController extends Controller
         Mail::to($user->email)->send(new MyMail($user->name));
 
         session()->forget('cart');
-        $packages = Package::all();
-        return response()->json($packages);
         return redirect()->route('cart.index')->with('success', 'Checkout complete!');
     }
 }
