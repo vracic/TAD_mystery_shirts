@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MyMail;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Shirt;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 
 class CartsController extends Controller
 {
@@ -43,34 +45,38 @@ class CartsController extends Controller
     }
 
     public function removeItem($index)
-{
-    $cart = session()->get('cart', []);
+    {
+        $cart = session()->get('cart', []);
 
-    if (isset($cart[$index])) {
-        unset($cart[$index]);
-        session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
+        if (isset($cart[$index])) {
+            unset($cart[$index]);
+            session()->put('cart', $cart);
+            return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
+        }
+
+        return redirect()->route('cart.index')->with('error', 'Item not found in cart.');
     }
-
-    return redirect()->route('cart.index')->with('error', 'Item not found in cart.');
-}
     public function checkout()
     {
         $cart = session()->get('cart', []);
         $userId = auth()->id();
 
-        if (empty($cart)) {
-            return back() -> with('message', 'Your cart is empty!');
-        }
+        $user = User::findOrFail($userId);
+
+        // if (empty($cart)) {
+        //     return back() -> with('message', 'Your cart is empty!');
+        // }
 
         $order = new Order();
-        $order->user_id = $userId; 
-        $order->items = $cart;
+        $order->user_id = $user->id; 
+        $order->items = implode($cart);
         $order->save();
         
-        //send email
+        Mail::to($user->email)->send(new MyMail($user->name));
 
         session()->forget('cart');
+        $packages = Package::all();
+        return response()->json($packages);
         return redirect()->route('cart.index')->with('success', 'Checkout complete!');
     }
 }

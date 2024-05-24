@@ -10,11 +10,14 @@ class PackagesController extends Controller
     public function index()
     {
         $packages = Package::all();
+        return response()->json($packages);
         return view('packages.index', compact('packages'));
     }
 
-    public function show(Package $package)
+    public function show($id)
     {
+        $package = Package::findOrFail($id);
+        return response()->json($package);
         return view('package.show', compact('package'));
     }
 

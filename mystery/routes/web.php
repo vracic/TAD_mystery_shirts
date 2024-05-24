@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ShirtsController;
@@ -10,19 +11,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/packages', [PackagesController::class, 'index'])->name('packages.index');
+Route::get('/packages/{id}', [PackagesController::class, 'show'])->name('packages.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/home', function () {
         return view('auth.dashboard');
     });
-    Route::get('/packages', [PackagesController::class, 'index'])->name('packages.index');
-    Route::get('packages/{package}', [PackagesController::class, 'show'])->name('packages.show');
     
     Route::get('cart', [CartsController::class, 'index'])->name('cart.index');
     Route::post('cart', [CartsController::class, 'store'])->name('cart.store');
-    Route::get('/cart/remove/{index}', [CartController::class, 'removeItem'])->name('cart.remove');
-    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-
+    Route::get('/cart/remove/{index}', [CartsController::class, 'removeItem'])->name('cart.remove');
+    Route::post('/cart/checkout', [CartsController::class, 'checkout'])->name('cart.checkout');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
