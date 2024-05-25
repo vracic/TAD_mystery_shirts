@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_package', function (Blueprint $table) {
+        Schema::create('order_package', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('user_id')->nullable(true);
+            $table->string("size");
+            $table->unsignedBigInteger('order_id')->nullable(true);
             $table->unsignedBigInteger('package_id')->nullable(true);
-            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('order_id')->references('id')->on('orders')->nullOnDelete();
             $table->foreign('package_id')->references('id')->on('packages')->nullOnDelete();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_package');
+        Schema::dropIfExists('order_package');
     }
 };

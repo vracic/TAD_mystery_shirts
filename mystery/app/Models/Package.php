@@ -13,7 +13,7 @@ class Package extends Model
         return $this->hasOne(Shirt::class);
     }
 
-    public function users() {
-        return $this->belongsToMany(User::class)->withTimestamp();
+    public function orders() {
+        return $this->belongsToMany(Order::class)->withPivot('size');
     }
 }

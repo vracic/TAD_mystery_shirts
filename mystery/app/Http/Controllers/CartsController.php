@@ -32,7 +32,8 @@ class CartsController extends Controller
         
         $item = [
             'type' => $package->type,
-            'size' => $request->size
+            'size' => $request->size,
+            'package_id' => $package->id,
         ];
         
         // Create the cart session if not exists
@@ -68,10 +69,14 @@ class CartsController extends Controller
         }
 
         $order = new Order();
-        $order->user_id = $user->id; 
-        $order->items = implode($cart);
+        $order->user_id = 4; 
+        $order->items = json_encode($cart);
         $order->address = $request->address;
         $order->save();
+
+        foreach ($cart as $item) {
+            $order->packages()->attach($item['package_id'], ['size' => $item['size']]);
+        }
         
         Mail::to($user->email)->send(new MyMail($user->name));
 

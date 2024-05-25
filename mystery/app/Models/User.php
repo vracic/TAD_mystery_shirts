@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function packages() {
-        return $this->belongsToMany(Package::class)->withTimestamp();
+    public function orders() {
+        return $this->belongsToMany(Order::class)->withTimestamp();
     }
 }

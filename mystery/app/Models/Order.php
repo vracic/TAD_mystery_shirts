@@ -9,8 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function package() {
-        return $this->hasOne(Package::class);
+    public function packages() {
+        return $this->belongsToMany(Package::class)->withPivot('size');
     }
 
     public function user() {
