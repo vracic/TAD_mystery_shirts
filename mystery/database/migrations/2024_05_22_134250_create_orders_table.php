@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('sent')->default(false);
             $table->json('items');
             $table->string('address');
+            $table->string('avoidNations');
             $table->unsignedBigInteger('user_id')->nullable(true);
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });

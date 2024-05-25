@@ -72,6 +72,7 @@ class CartsController extends Controller
         $order->user_id = 4; 
         $order->items = json_encode($cart);
         $order->address = $request->address;
+        $order->avoidNations = $request->avoidNations;
         $order->save();
 
         foreach ($cart as $item) {
