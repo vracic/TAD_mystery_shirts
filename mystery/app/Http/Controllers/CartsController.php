@@ -56,7 +56,7 @@ class CartsController extends Controller
 
         return redirect()->route('cart.index')->with('error', 'Item not found in cart.');
     }
-    public function checkout()
+    public function checkout(Request $request)
     {
         $cart = session()->get('cart', []);
         $userId = auth()->id();
@@ -70,6 +70,7 @@ class CartsController extends Controller
         $order = new Order();
         $order->user_id = $user->id; 
         $order->items = implode($cart);
+        $order->address = $request->address;
         $order->save();
         
         Mail::to($user->email)->send(new MyMail($user->name));
