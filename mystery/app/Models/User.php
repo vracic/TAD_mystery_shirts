@@ -43,6 +43,10 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function orders() {
-        return $this->belongsToMany(Order::class)->withTimestamp();
+        return $this->hasMany(Order::class);
+    }
+
+    public function favorites() {
+        return $this->belongsToMany(Package::class)->withTimestamp();
     }
 }
