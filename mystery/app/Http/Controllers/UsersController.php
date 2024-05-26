@@ -67,10 +67,10 @@ class UsersController extends Controller
         if ($user->favorites()->where('package_id', $package_id)->exists())
         {
             $user->favorites()->detach($package_id);
-            return back()->with('message', 'Favorite removed successfuly.');
+            return response()->json(['is_favorite' => false]);
         }
 
         $user->favorites()->attach($package_id);
-        return back()->with('message', 'Favorite added successfuly.');
+        return response()->json(['is_favorite' => true]);
     }
 }

@@ -21,11 +21,13 @@ class PackagesController extends Controller
 
     public function create(Request $request) 
     {
-        $request->validate(['type'=> 'required', 'name' => 'required', 'price' => 'required']);
+        $request->validate(['type_en'=> 'required', 'name_en' => 'required', 'type_es'=> 'required', 'name_es' => 'required', 'price' => 'required']);
 
         $newP = new Package;
-        $newP-> type = $request->type;
-        $newP-> name = $request->name;
+        $newP-> type_en = $request->type_en;
+        $newP-> name_en = $request->name_en;
+        $newP-> type_es = $request->type_es;
+        $newP-> name_es = $request->name_es;
         $newP-> price = $request->price;
 
         $newP -> save();
@@ -39,10 +41,12 @@ class PackagesController extends Controller
     }
 
     public function update(Request $request, $id) {
-        $request->validate(['type'=> 'required', 'name' => 'required', 'price' => 'required']);
+        $request->validate(['type_en'=> 'required', 'name_en' => 'required', 'type_es'=> 'required', 'name_es' => 'required', 'price' => 'required']);
         $package = Package::findOrFail($id);
-        $package-> type = $request->type;
-        $package-> name = $request->name;
+        $package-> type_en = $request->type_en;
+        $package-> name_en = $request->name_en;
+        $package-> type_es = $request->type_es;
+        $package-> name_es = $request->name_es;
         $package-> price = $request->price;
         return redirect()->to('/packages')->with('message','Package edited successfully!');
     }
@@ -52,6 +56,4 @@ class PackagesController extends Controller
         $package->delete();
         return back()->with('message','Package deleted successfully!');
     }
-
-
 }

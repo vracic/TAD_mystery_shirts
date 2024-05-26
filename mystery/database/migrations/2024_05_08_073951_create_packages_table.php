@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
-            $table->string('type');
+            $table->string('name_en');
+            $table->string('name_es');
+            $table->string('type_en');
+            $table->string('type_es');
             $table->decimal('price', 8, 2);
         });
     }

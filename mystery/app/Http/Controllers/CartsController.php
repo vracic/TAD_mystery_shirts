@@ -31,7 +31,7 @@ class CartsController extends Controller
         $package = Package::findOrFail($request->package_id);
         
         $item = [
-            'type' => $package->type,
+            'type' => $package->type_en,
             'size' => $request->size,
             'package_id' => $package->id,
         ];
