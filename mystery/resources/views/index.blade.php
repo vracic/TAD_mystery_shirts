@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ app()->getLocale() }}">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adaptative Markenting - Práctica Boostrap</title>
+    <title>Kick Mystery Box</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -59,11 +59,12 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link active" href="#home">Home</a>
-            <a class="nav-link" href="#boxes">Boxes</a>
-            <a class="nav-link" href="#HowItWorks">How It Works</a>
-            <a class="nav-link" href="#aboutUs">About Us</a>
-            <a class="nav-link" href="#getConnected">Contact</a>
+            <a class="nav-link active" href="#home">@lang('messages.nav_home')</a>
+            <a class="nav-link" href="#boxes">@lang('messages.nav_boxes')</a>
+            <a class="nav-link" href="#HowItWorks">@lang('messages.nav_hiw')</a>
+            <a class="nav-link" href="#aboutUs">@lang('messages.about')</a>
+            <a class="nav-link" href="#getConnected">@lang('messages.nav_contact')</a>
+            <a class="nav-link" href="#" onclick="toggleLang()" onclick="toggleLang()">@lang('messages.lang') </a>
           </div>
         </div>
       </div>
@@ -73,9 +74,9 @@
         <div class="display-1">Kick Mystery Box</div>
 
         <p class="welcome-text mb-5">
-            Unbox the excitement of soccer with every mystery box!
+        @lang('messages.unlock')
         </p>
-        <a href="#boxes" class="btn btn-outline-light" id="showBoxesBtn">Take a look</a>
+        <a href="#boxes" class="btn btn-outline-light" id="showBoxesBtn">@lang('messages.take_a_look')</a>
         <div class="hero-shadow"></div>
         
       </div>
@@ -85,102 +86,21 @@
       <section id="boxes">
         <div class="container py-5 ">
           <div class="row text-center">
+          @foreach ($packages as $package)
             <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
                 <div class="p-6 bg-light-light">
                     <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                    <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">
-                    <h3 class="mb-2 lead fw-bold">MAN FOOTBALL SHIRT BOX</h3>
-                    <p class="h6 text-info">
-                        <span class="small text-secondary text-decoration-line-through">$33.69</span>
-                        <span class="badge bg-white border border-2 border-danger rounded-pill fw-bold text-danger">-15%</span>
-                    </p>
-                    <p class="h6 text-info">
-                        <span>XX.XX€</span>
-                    </p>
+                        <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">                        
+                        <h3 class="mb-2 lead fw-bold">{{ app()->getLocale() === 'en' ? $package->name_en : $package->name_es }}</h3>
+                        <p class="h6 text-info">
+                            <span class="small text-secondary">${{ number_format($package->price, 2) }}</span>
+                        </p>
                     </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">Buy Now</a>
+                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">@lang('messages.buyNow')</a>
                 </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
-                <div class="p-6 bg-light-light">
-                    <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                    <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">
-                    <h3 class="mb-2 lead fw-bold">WOMAN FOOTBALL SHIRT BOX</h3>
-                    <p class="h6 text-info">
-                        <span class="small text-secondary text-decoration-line-through">$33.69</span>
-                        <span class="badge bg-white border border-2 border-danger rounded-pill fw-bold text-danger ">-15%</span>
-                    </p>
-                    <p class="h6 text-info">
-                        <span>XX.XX€</span>
-                    </p>
-                    </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">Buy Now</a>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
-                <div class="p-6 bg-light-light">
-                    <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                    <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">
-                    <h3 class="mb-2 lead fw-bold">KIDS FOOTBALL SHIRT BOX</h3>
-                    <p class="h6 text-info">
-                        <span class="small text-secondary text-decoration-line-through">$33.69</span>
-                        <span class="badge bg-white border border-2 border-danger rounded-pill fw-bold text-danger">-15%</span>
-                    </p>
-                    <p class="h6 text-info">
-                        <span>XX.XX€</span>
-                    </p>
-                    </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">Buy Now</a>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
-                <div class="p-6 bg-light-light">
-                    <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                    <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">
-                    <h3 class="mb-2 lead fw-bold">RETRO FOOTBALL SHIRT BOX</h3>
-                    <p class="h6 text-info">
-                        <span class="small text-secondary text-decoration-line-through">$33.69</span>
-                        <span class="badge bg-white border border-2 border-danger rounded-pill fw-bold text-danger">-15%</span>
-                    </p>
-                    <p class="h6 text-info">
-                        <span>XX.XX€</span>
-                    </p>
-                    </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">Buy Now</a>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
-                <div class="p-6 bg-light-light">
-                    <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                    <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">
-                    <h3 class="mb-2 lead fw-bold">VINTAGE FOOTBALL SHIRT BOX</h3>
-                    <p class="h6 text-info">
-                        <span class="small text-secondary text-decoration-line-through">$33.69</span>
-                        <span class="badge bg-white border border-2 border-danger rounded-pill fw-bold text-danger">-15%</span>
-                    </p>
-                    <p class="h6 text-info">
-                        <span>XX.XX€</span>
-                    </p>
-                    </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">Buy Now</a>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
-                <div class="p-6 bg-light-light">
-                    <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                    <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">
-                    <h3 class="mb-2 lead fw-bold">2020-2024 SEASON FOOTBALL SHIRT BOX</h3>
-                    <p class="h6 text-info">
-                        <span class="small text-secondary text-decoration-line-through">$33.69</span>
-                        <span class="badge bg-white border border-2 border-danger rounded-pill fw-bold text-danger">-15%</span>
-                    </p>
-                    <p class="h6 text-info">
-                        <span>XX.XX€</span>
-                    </p>
-                    </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">Buy Now</a>
-                </div>
-            </div>
+           @endforeach
+
           </div>
         </div>
 
@@ -192,8 +112,8 @@
       <section id="HowItWorks" class="HowItWorks py-5">
         <div class="container py-5 text-center">
             <div class="display-3 orange-color mb-0 text-uppercase plan py-5">
-                <p class="purpleText">HOW DO MYSTERY FOOTBALL</p>
-                <p class="purpleText">SHIRT BOXES WORK</p>
+                <p class="purpleText">@lang('messages.howDoWork1')</p>
+                <p class="purpleText">@lang('messages.howDoWork2')</p>
             </div>
         </div>
         <div class="container py-5">
@@ -202,25 +122,25 @@
                     <div class="divImg">
                         <img src="img/paquete.png" alt="Choose Your Box" class="img-fluid mb-3 card-img-top">
                     </div>
-                    <h3><strong>CHOOSE YOUR BOX</strong></h3>
-                    <p>Browse our collection of Mystery Boxes and <strong>the Mystery Football Shirt box</strong> that's right for you.</p>
+                    <h3><strong>@lang('messages.choose')</strong></h3>
+                    <p>@lang('messages.browse1')<strong>@lang('messages.browseStrong')</strong>@lang('messages.browse2')</p>
                 </div>
                 <div class="col-md-4">
                     <div class="divImg">
                         <img src="img/camiseta-de-futbol.png" alt="Place Your Order" class="img-fluid mb-3 card-img-top">
                     </div>
-                    <h3><strong> YOUR ORDER</strong></h3>
-                    <p>Select your jersey size and <strong>us know any teams or nations you'd like to avoid</strong> and complete your purchase.</p>
+                    <h3><strong>@lang('messages.yourOrder')</strong></h3>
+                    <p>@lang('messages.select1')<strong>@lang('messages.selectStrong')</strong>@lang('messages.select2')</p>
                 </div>
                 <div class="col-md-4">
                     <div class="divImg">
                         <img src="img/paquete-entregado.png" alt="We'll Pick Your Shirt" class="img-fluid mb-3 card-img-top">
                     </div>
-                    <h3><strong> GETR YOUR SHIRT</strong></h3>
-                    <p>It really is that simple! We will send you the box <strong>as soon as your order has been dispatched.</strong></p>
+                    <h3><strong> @lang('messages.get')</strong></h3>
+                    <p>@lang('messages.simple')<strong>@lang('messages.simpleStrong')</strong></p>
                 </div>
                 <div >
-                    <a href="#boxes" class="btn btn-outline-light" id="showBoxesBtn">SHOW MISTERY BOXES</a>
+                    <a href="#boxes" class="btn btn-outline-light" id="showBoxesBtn">@lang('messages.showBoxes')</a>
                 </div>
             </div>
            
@@ -233,7 +153,7 @@
         <div class="container py-5 mb-5">
             <div class="container py-5 text-center">
                 <div class="display-3 orange-color mb-0 text-uppercase plan py-5">
-                    <p class="purpleText">ABOUT US</p>
+                    <p class="purpleText">@lang('messages.about')</p>
                 </div>
             </div>
             <div class="accordion" id="accordionExample">
@@ -246,7 +166,7 @@
                             data-bs-target="#collapseOne"
                             aria-expanded="true"
                             aria-controls="collapseOne">
-                            Returns and delivery
+                            @lang('messages.returns1')
                         </button>
                     </h2>
                     <div
@@ -255,7 +175,7 @@
                         aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            The returns and delivery policy is very simple. If you are not satisfied with your purchase, you can return it within 30 days and we will refund your money. The delivery time is 3-5 days.
+                            @lang('messages.returns2')
                         </div>
                     </div>
                 </div>
@@ -268,7 +188,7 @@
                             data-bs-target="#collapseTwo"
                             aria-expanded="false"
                             aria-controls="collapseTwo">
-                            Gifts for football lovers
+                            @lang('messages.gifts')
                         </button>
                     </h2>
                     <div
@@ -277,7 +197,7 @@
                         aria-labelledby="headingTwo"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            If you are looking for a gift for a football lover, the Mystery Football Shirt Box is the perfect gift. You can choose the size of the shirt and the team or nation you want to avoid. Let us know and we will take care of the rest.
+                        @lang('messages.lookingForGift')
                         </div>
                     </div>
                 </div>
@@ -290,7 +210,7 @@
                             data-bs-target="#collapseThree"
                             aria-expanded="false"
                             aria-controls="collapseThree">
-                            Size guide
+                            @lang('messages.sizeGuide')
                         </button>
                     </h2>
                     <div
@@ -303,9 +223,9 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Size</th>
-                                            <th scope="col">Chest (cm)</th>
-                                            <th scope="col">Length (cm)</th>
+                                            <th scope="col">@lang('messages.size')</th>
+                                            <th scope="col">@lang('messages.chest')</th>
+                                            <th scope="col">@lang('messages.length')</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -344,7 +264,7 @@
         <div class="container text-center">
             <div class="container py-5 text-center">
                 <div class="display-3 orange-color mb-0 text-uppercase plan py-5">
-                    <p class="purpleText">GET CONNECTED</p>
+                    <p class="purpleText">@lang('messages.getConnected')</p>
                 </div>
             </div>
             <p class="lead"></p>
@@ -353,7 +273,7 @@
                     <div class="card-contact p-3 mb-5 shadow-sm">
                         <div class="card-body">
                             <img src="img/email.png" alt="Send Email" class="mb-3" width="50">
-                            <h5 class="card-title"><strong>Send Email</strong></h5>
+                            <h5 class="card-title"><strong>@lang('messages.sendEmail')</strong></h5>
                             <p class="card-text">info@Mbox.com<br>support@Mbox.com</p>
                         </div>
                     </div>
@@ -362,7 +282,7 @@
                     <div class="card-contact p-3 mb-5 shadow-sm">
                         <div class="card-body">
                             <img src="img/llamada-telefonica.png" alt="Call Us" class="mb-3" width="50">
-                            <h5 class="card-title"><strong>Call Us</strong></h5>
+                            <h5 class="card-title"><strong>@lang('messages.call')</strong></h5>
                             <p class="card-text">+34 666 000 666<br>+34 600 600 600</p>
                         </div>
                     </div>
@@ -371,7 +291,7 @@
                     <div class="card-contact p-3 mb-5 shadow-sm">
                         <div class="card-body">
                             <img src="img/ubicacion.png" alt="Address" class="mb-3" width="50">
-                            <h5 class="card-title"><strong>Address</strong></h5>
+                            <h5 class="card-title"><strong>@lang('messages.address')</strong></h5>
                             <p class="card-text">Avenida Luis Montoto, 1<br>Seville 41005, Spain</p>
                         </div>
                     </div>
@@ -383,15 +303,15 @@
 
     <section id="newsletter" class="newsletter bg-dark text-light py-5">
         <div class="container text-center">
-            <h2 class="display-4 font-weight-bold purpleText">Subscribe to our newsletter</h2>
+            <h2 class="display-4 font-weight-bold purpleText">@lang('messages.subscribeTo')</h2>
             <p class="lead">
-                Get the latest news and offers from Mystery Football Shirt Box delivered straight to your inbox.    
+                @lang('messages.news')
             </p>
             <form class="row py-5">
                 <div class="col-md-6 offset-md-3">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Enter your email">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
+                        <button class="btn btn-primary" type="button">@lang('messages.subscribe')</button>
                     </div>
                 </div>
             </form>
@@ -408,5 +328,10 @@
       crossorigin="anonymous"
     ></script>
     <script src="script/script.js"></script>
+    <script>
+        function toggleLang() {
+            window.location.href = "{{ route('toggleLang') }}";
+        }
+    </script>
   </body>
 </html>

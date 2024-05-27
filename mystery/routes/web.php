@@ -4,20 +4,30 @@ use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\UsersController;
+use App\Models\Package;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/packages', [PackagesController::class, 'index'])->name('packages.index');
+Route::get('toggleLang', function () {
+    $currentLocale = Session::get('locale');
+    $newLocale = $currentLocale === 'en' ? 'es' : 'en';
+    App::setLocale($newLocale);
+    Session::put('locale', $newLocale);
+
+    $packages = Package::all();
+    return view('index', compact('packages'));
+})->name('toggleLang');
+
+Route::get('/home', [PackagesController::class, 'index'])->name('packages.index');
 Route::get('/packages/{id}', [PackagesController::class, 'show'])->name('packages.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/home', function () {
-        return view('auth.dashboard');
-    });
+
     
     Route::get('cart', [CartsController::class, 'index'])->name('cart.index');
     Route::post('cart', [CartsController::class, 'store'])->name('cart.store');

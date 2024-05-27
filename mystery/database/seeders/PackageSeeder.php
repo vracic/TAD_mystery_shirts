@@ -16,12 +16,12 @@ class PackageSeeder extends Seeder
     public function run()
     {
         $packages = [
-            ['name' => 'MAN FOOTBALL SHIRT BOX', 'type' => 'male', 'price' => 75.00],
-            ['name' => 'WOMAN FOOTBALL SHIRT BOX', 'type' => 'female', 'price' => 75.00],
-            ['name' => 'KIDS FOOTBALL SHIRT BOX', 'type' => 'kids', 'price' => 35.00],
-            ['name' => 'RETRO FOOTBALL SHIRT BOX', 'type' => 'retro', 'price' => 75.00],
-            ['name' => 'VINTAGE FOOTBALL SHIRT BOX', 'type' => 'vintage', 'price' => 75.00],
-            ['name' => '2020-2024 SEASON FOOTBALL SHIRT BOX', 'type' => 'new', 'price' => 35.00],
+            ['name_en' => 'MAN FOOTBALL SHIRT BOX', 'name_es' => 'CAJA DE CAMISETA DE FUTBOL HOMBRE', 'type_es' => 'hombre', 'type_en' => 'male', 'price' => 75.00],
+            ['name_en' => 'WOMAN FOOTBALL SHIRT BOX', 'name_es' => 'CAJA DE CAMISETA DE FUTBOL MUJER', 'type_es' => 'mujer','type_en' => 'female', 'price' => 75.00],
+            ['name_en' => 'KIDS FOOTBALL SHIRT BOX', 'name_es' => 'CAJA DE CAMISETA DE FUTBOL NINOS', 'type_es' => 'ninos', 'type_en' => 'kids', 'price' => 35.00],
+            ['name_en' => 'RETRO FOOTBALL SHIRT BOX', 'name_es' => 'CAJA DE CAMISETA DE FUTBOL RETRO', 'type_es' => 'retro', 'type_en' => 'retro', 'price' => 75.00],
+            ['name_en' => 'VINTAGE FOOTBALL SHIRT BOX', 'name_es' => 'CAJA DE CAMISETA DE FUTBOL VINTAGE', 'type_es' => 'vintage', 'type_en' => 'vintage', 'price' => 75.00],
+            ['name_en' => '2020-2024 SEASON FOOTBALL SHIRT', 'name_es' => 'CAJA DE CAMISETA DE FUTBOL 2020-2024', 'type_es' => 'nuevo', 'type_en' => 'new', 'price' => 35.00],
         ];
 
         DB::table('packages')->insert($packages);
