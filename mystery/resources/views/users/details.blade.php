@@ -88,13 +88,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (json_decode($order->items, true) as $item)
+                    @foreach (json_decode($order->items, true) as $item)
                         <tr>
-                            <td>{{ $item['name_en'] }}</td>
-                            <td>{{ $item['size'] }}</td>
-                            <!-- Add more table cells for additional item attributes -->
+                            <td>{{ isset($item['name_en']) ? $item['name_en'] : 'N/A' }}</td>
+                            <td>{{ isset($item['size']) ? $item['size'] : 'N/A' }}</td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
                 <hr>

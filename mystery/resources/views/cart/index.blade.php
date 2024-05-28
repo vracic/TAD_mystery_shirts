@@ -43,6 +43,5 @@
 
     <main>
     </main>
-</section>
 
 @endsection

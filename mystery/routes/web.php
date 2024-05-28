@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackagesController;
@@ -9,12 +10,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/', [PackagesController::class, 'index'])->name('packages.index');
+
     Route::get('toggleLang', function () {
         $currentLocale = Session::get('locale');
         $newLocale = $currentLocale === 'en' ? 'es' : 'en';
@@ -33,7 +32,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('cart/store', [CartsController::class, 'store'])->name('cart.store');
     Route::post('/cart/remove/{index}', [CartsController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/checkout', [CartsController::class, 'checkout'])->name('cart.checkout');
-
+    
     Route::get('/users/details', [UsersController::class, 'show'])->name('users.show');
     Route::put('/users', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
@@ -42,6 +41,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
     Route::post('packages', [PackagesController::class,'crear'])->name('packages.create');
     Route::get('packages/edit/{id}', [ PackagesController::class, 'edit' ]) -> name('packages.edit'); 
     Route::put('packages/edit/{id}', [ PackagesController::class, 'update' ]) -> name('packages.update');

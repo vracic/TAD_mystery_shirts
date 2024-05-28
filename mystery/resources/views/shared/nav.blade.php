@@ -29,15 +29,38 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link {{ request()->routeIs('packages.index') || request()->routeIs('other.home.routes') ? 'active' : '' }}" href="{{ route('packages.index') }}">@lang('messages.nav_home')</a>
-            <!-- <a class="nav-link" href="#boxes">@lang('messages.nav_boxes')</a>
-            <a class="nav-link" href="#HowItWorks">@lang('messages.nav_hiw')</a>
-            <a class="nav-link" href="#aboutUs">@lang('messages.about')</a>
-            <a class="nav-link" href="#getConnected">@lang('messages.nav_contact')</a> -->
-            <a class="nav-link {{ request()->routeIs('cart.index') ? 'active' : '' }}" href="{{ route('cart.index') }}">@lang('messages.cart')</a>
-            <a class="nav-link {{ request()->routeIs('users.show') ? 'active' : '' }}" href="{{ route('users.show') }}">@lang('myProfile')</a>
-            <a class="nav-link" href="#" onclick="toggleLang()">@lang('messages.lang') </a>
 
+            @if(auth()->check())
+              @if(auth()->user()->isAdmin())
+              <a class="nav-link" href="{{ route('admin.index') }}" >Admin page</a>
+                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
+              @else
+                  <a class="nav-link {{ request()->routeIs('packages.index') || request()->routeIs('other.home.routes') ? 'active' : '' }}" href="{{ route('packages.index') }}">@lang('messages.nav_home')</a>
+                  <a class="nav-link {{ request()->routeIs('cart.index') ? 'active' : '' }}" href="{{ route('cart.index') }}">@lang('messages.cart')</a>
+                  <a class="nav-link" href="#" onclick="toggleLang()">@lang('messages.lang') </a>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li>
+                          <a class="dropdown-item" href="{{ route('users.show') }}">{{ __('My Profile') }}</a>
+                      </li>                      <li>
+                          <hr class="dropdown-divider">
+                      </li>
+                      <li>
+                          <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                      </li>
+                    </ul>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
+                  </div>
+                  @endif
+                  @endif
           </div>
         </div>
       </div>
