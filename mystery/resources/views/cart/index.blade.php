@@ -15,8 +15,12 @@
     </section>
 
     <main>
-            @foreach ($cart as $c)
+            @foreach ($cart as $index => $c)
                 <p> {{ $c['type'] }}</p>
+                <form action="{{ route('cart.remove', ['index' => $index]) }}" method="POST">
+                    @csrf   
+                    <button type="submit">Remove</button>
+                </form>
             @endforeach
 
 
