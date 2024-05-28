@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\MyMail;
 use App\Models\Order;
 use App\Models\Package;
-use App\Models\Shirt;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +15,12 @@ class CartsController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        //return response()->json(compact('cart'));
-        return view('cart.index', compact('cart'));
+        $total_price = 0.0;
+
+        foreach ($cart as $item) {
+            $total_price += $item['price'];
+        }
+        return view('cart.index', compact('cart', 'total_price'));
     }
 
     public function store(Request $request)
@@ -33,9 +36,12 @@ class CartsController extends Controller
         
         $item = [
             'type' => $package->type_en,
+            'name_en' => $package->name_en,
+            'name_es' => $package->name_es,
             'size' => $request->size,
             'package_id' => $package->id,
             'nations' => $request->nations,
+            'price' => $package->price,
         ];
         
         // Create the cart session if not exists
@@ -59,6 +65,7 @@ class CartsController extends Controller
 
         return redirect()->route('cart.index')->with('error', 'Item not found in cart.');
     }
+    
     public function checkout(Request $request)
     {
         // Validate request
@@ -76,7 +83,7 @@ class CartsController extends Controller
         }
 
         $order = new Order();
-        $order->user_id = 4; 
+        $order->user_id = $user->id;
         $order->items = json_encode($cart);
         $order->address = $request->address;
         $order->save();

@@ -34,11 +34,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/cart/remove/{index}', [CartsController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/checkout', [CartsController::class, 'checkout'])->name('cart.checkout');
 
-    Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show');
-    Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::get('/users/details', [UsersController::class, 'show'])->name('users.show');
+    Route::put('/users', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
-    Route::post('/users/{user_id}/{package_id}', [UsersController::class, 'changeFavorite'])->name('users.changeFavorite');
+    Route::post('/users/{package_id}', [UsersController::class, 'changeFavorite'])->name('users.changeFavorite');
 });
 
 

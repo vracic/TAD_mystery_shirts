@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -13,37 +15,34 @@ class UsersController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(auth()->id());
         $favorites = $user->favorites;
-        return view('user.detail', compact('user', 'favorites'));
+        $packages = [];
+        foreach($favorites as $fav) {
+            $packages[] = Package::findOrFail($fav->pivot->package_id);
+        }
+        $orders = Order::where('user_id', auth()->id())->get();
+        // return response()->json($orders);
+        return view('users.details', compact('user', 'packages', 'orders'));
     }
 
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        $favorites = $user->favorites;
-        return view('user.edit', compact('user', 'favorites'));
-    }
-
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'required|string|min:8',
+            'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
         ]);
 
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(auth()->id());
 
-        if ($request->has('name')) {
-            $user->name = $request->name;
-        }
-        if ($request->has('email')) {
-            $user->email = $request->email;
-        }
-        if ($request->has('password')) {
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->has('password') && strlen($request->password) > 0) {
+            if (strlen($request->password) < 8) {
+                return back()->with('message', 'New password needs to have at least 8 characters.');
+            }
             $user->password = bcrypt($request->password);
         }
 
@@ -60,17 +59,17 @@ class UsersController extends Controller
         return back()->with('message', 'User deleted successfuly.');
     }
 
-    public function changeFavorite($user_id, $package_id) {
-        $user = User::findOrFail($user_id);
+    public function changeFavorite($package_id) {
+        $user = User::findOrFail(auth()->id());
 
         // if user already has this package as favorite then remove it, if not add it.
         if ($user->favorites()->where('package_id', $package_id)->exists())
         {
             $user->favorites()->detach($package_id);
-            return response()->json(['is_favorite' => false]);
+            return response()->json(['isFavorite' => false]);
         }
 
         $user->favorites()->attach($package_id);
-        return response()->json(['is_favorite' => true]);
+        return response()->json(['isFavorite' => true]);
     }
 }

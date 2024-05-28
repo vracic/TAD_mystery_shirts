@@ -42,4 +42,6 @@ return [
     'addToCart' => 'add to cart',
     'nations' => 'nations to avoid',
     'cart' => 'cart',
+    'myProfile' => 'My profile',
+
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PackagesController extends Controller
@@ -10,7 +11,8 @@ class PackagesController extends Controller
     public function index()
     {
         $packages = Package::all();
-        return view('index', compact('packages'));
+        $user = User::findOrFail(auth()->id());
+        return view('index', compact('packages', 'user'));
     }
 
     public function show($id)

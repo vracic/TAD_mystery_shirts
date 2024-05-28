@@ -24,6 +24,15 @@
                     <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
                         <img class="mb-5 mx-auto img-fluid w-100" style="height: 300px; object-fit: contain;" src="img/example.png" alt="">                        
                         <h3 class="mb-2 lead fw-bold">{{ app()->getLocale() === 'en' ? $package->name_en : $package->name_es }}</h3>
+
+                        @php
+                            $isFavorite = $user->favorites->contains($package->id);
+                        @endphp
+
+                        <button id="toggle-favorite-btn-{{ $package->id }}" class="btn {{ $isFavorite ? 'favorite' : 'not-favorite' }}" title="{{ $isFavorite ? 'Remove from favorites' : 'Add to favorites' }}" onclick="toggleFavorite({{ $package->id }})">
+                            &#x2764; 
+                        </button>
+
                         <p class="h6 text-info">
                             <span class="small text-secondary">${{ number_format($package->price, 2) }}</span>
                         </p>
@@ -63,10 +72,6 @@
 
           </div>
         </div>
-
-        
-
-        
       </section>
 
       <section id="HowItWorks" class="HowItWorks py-5">
@@ -103,11 +108,8 @@
                     <a href="#boxes" class="btn btn-outline-light" id="showBoxesBtn">@lang('messages.showBoxes')</a>
                 </div>
             </div>
-           
         </div>
     </section>
-
-
 
     <section id="aboutUs" class="aboutUs bg-light py-5">
         <div class="container py-5 mb-5">
@@ -280,5 +282,32 @@
     </section>
 
     </main>
+
+    <script>
+        function toggleFavorite(packageId) {
+            const url = `/users/${packageId}`;
+            const token = '{{ csrf_token() }}';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const button = document.getElementById(`toggle-favorite-btn-${packageId}`);
+                if (data.isFavorite) {
+                    button.classList.remove('not-favorite');
+                    button.classList.add('favorite');
+                } else {
+                    button.classList.remove('favorite');
+                    button.classList.add('not-favorite');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
     
 @endsection

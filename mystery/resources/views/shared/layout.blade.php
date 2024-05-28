@@ -21,7 +21,22 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        .favorite {
+            color: red;
+        }
+        .not-favorite {
+            color: black;
+        }
+        th {
+            padding-right: 20px; /* Adjust as needed */
+        }
+
+        td {
+            padding-right: 20px; /* Adjust as needed */
+        }
+    </style>
   </head>
   
   <!--habilitar la funcionalidad de espionaje de navegación-->
@@ -29,16 +44,11 @@
 
     @include('shared.nav')
   
-    <div >
+    <div>
           @yield('content')
       </div>
 
   </body>
-
-
-
-
-
 
   <footer class="bg-dark text-light border-top">
       <p class="text-center py-5 mb-0">&copy; Kick Mistery Box</p>
@@ -47,7 +57,7 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
-    <script src="script/script.js"></script>
+    <script src="/script/script.js"></script>
     <script>
         function toggleLang() {
             window.location.href = "{{ route('toggleLang') }}";
@@ -85,5 +95,32 @@
         }
     });
     </script>
+        
+        <script>
+          function toggleFavorite(packageId) {
+              const url = `/users/${packageId}`;
+              const token = '{{ csrf_token() }}';
+
+              fetch(url, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'X-CSRF-TOKEN': token
+                      }
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      const button = document.getElementById(`toggle-favorite-btn-${packageId}`);
+                      if (data.isFavorite) {
+                          button.classList.remove('not-favorite');
+                          button.classList.add('favorite');
+                      } else {
+                          button.classList.remove('favorite');
+                          button.classList.add('not-favorite');
+                      }
+                  })
+                  .catch(error => console.error('Error:', error));
+          }
+      </script>
   </body>
 </html>

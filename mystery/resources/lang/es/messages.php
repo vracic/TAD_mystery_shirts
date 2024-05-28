@@ -42,5 +42,6 @@ return [
     'addToCart' => 'añadir a la cesta',
     'nations' => 'naciones a evitar',
     'cart' => 'carro',
+    'myProfile' => 'Mi perfil',
 
 ];
