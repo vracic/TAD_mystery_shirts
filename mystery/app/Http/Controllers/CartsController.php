@@ -16,6 +16,7 @@ class CartsController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
+        //return response()->json(compact('cart'));
         return view('cart.index', compact('cart'));
     }
 
@@ -34,14 +35,15 @@ class CartsController extends Controller
             'type' => $package->type_en,
             'size' => $request->size,
             'package_id' => $package->id,
+            'nations' => $request->nations,
         ];
         
         // Create the cart session if not exists
-        $cart = session()->get('cart', []);
-
+        $cart = session()->get('cart', []);        
         $cart[] = $item;
-
+        
         session()->put('cart', $cart);
+
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
 
@@ -59,6 +61,11 @@ class CartsController extends Controller
     }
     public function checkout(Request $request)
     {
+        // Validate request
+        $request->validate([
+            'address' => 'required',
+        ]);
+
         $cart = session()->get('cart', []);
         $userId = auth()->id();
 
@@ -72,11 +79,10 @@ class CartsController extends Controller
         $order->user_id = 4; 
         $order->items = json_encode($cart);
         $order->address = $request->address;
-        $order->avoidNations = $request->avoidNations;
         $order->save();
 
         foreach ($cart as $item) {
-            $order->packages()->attach($item['package_id'], ['size' => $item['size']]);
+            $order->packages()->attach($item['package_id'], ['size' => $item['size'], 'nations' => $item['nations']]);
         }
         
         Mail::to($user->email)->send(new MyMail($user->name));

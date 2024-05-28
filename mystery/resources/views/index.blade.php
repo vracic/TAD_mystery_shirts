@@ -1,75 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kick Mystery Box</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
-    <!--bi #icono en class para insertar icono -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <!--habilitar la funcionalidad de espionaje de navegación-->
-  <body data-bs-spy="scroll" data-bs-target="#navbar-scrollspy">
-    <nav
-      class="navbar navbar-expand-lg bg-light py-4 fixed-top custom-navbar"
-      id="navbar-scrollspy"
-    >
-      <div class="container">
-        <div class="logo">
-            <a aria-label="MisteryBox Element" data-cy="Mosterybox-logo" title="Back home" href="#"><img alt="Misterybox logo logo" loading="lazy" height="80" decoding="async" data-nimg="1" style="color:transparent" src="img/logo.png"></a>
-        </div>
-        <div class="navbar-title">
-            <ul>
-                <div id="ulNAbvar">Kick</div>
-                <div id="ulNAbvar">Mistery</div>
-                <div id="ulNAbvar">Box</div>
-            </ul>
-        </div>
-       
-        </a>
-        <!--  botón de hamburguesa para móviles -->
-        <button
-          class="navbar-toggler bg-dark ml-auto" 
-          
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
+@extends('shared.layout')
+@section('content')
 
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto">
-            <a class="nav-link active" href="#home">@lang('messages.nav_home')</a>
-            <a class="nav-link" href="#boxes">@lang('messages.nav_boxes')</a>
-            <a class="nav-link" href="#HowItWorks">@lang('messages.nav_hiw')</a>
-            <a class="nav-link" href="#aboutUs">@lang('messages.about')</a>
-            <a class="nav-link" href="#getConnected">@lang('messages.nav_contact')</a>
-            <a class="nav-link" href="#" onclick="toggleLang()" onclick="toggleLang()">@lang('messages.lang') </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <section id="home" class="home">
+<section id="home" class="home">
       <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-light text-center">
         <div class="display-1">Kick Mystery Box</div>
 
@@ -96,7 +28,35 @@
                             <span class="small text-secondary">${{ number_format($package->price, 2) }}</span>
                         </p>
                     </a>
-                    <a onclick="alert('Se debe abrir el popUp')" class="btn btn-sm btn-primary" id="showBoxesBtn">@lang('messages.buyNow')</a>
+                    <button class="btn btn-sm btn-primary" data-modal-id="modal-{{ $package->id }}">@lang('messages.buyNow')</button>
+                </div>
+            </div>
+
+            <div id="modal-{{ $package->id }}" class="modal">
+                <div class="modal-content">
+                    <span class="close" data-modal-id="modal-{{ $package->id }}">&times;</span>
+                    <div class="modal-body">
+                        <h3 class="mb-2 lead fw-bold">{{ app()->getLocale() === 'en' ? $package->name_en : $package->name_es }}</h3>
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            @csrf {{-- Cláusula para obtener un token de formulario al enviarlo --}}
+                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                            <div class="form-group">
+                                <label for="size">Size</label>
+                                <select id="size" name="size" class="form-control">
+                                    <option>Select</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nations">@lang('messages.nations')</label>
+                                <input type="text" name="nations" class="form-control"></input>
+                            </div>
+                            <button type="submit" class="btn btn-primary">@lang('messages.addToCart')</button>
+                        </form>
+                    </div>
                 </div>
             </div>
            @endforeach
@@ -320,18 +280,5 @@
     </section>
 
     </main>
-    <footer class="bg-dark text-light border-top">
-      <p class="text-center py-5 mb-0">&copy; Kick Mistery Box</p>
-    </footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="script/script.js"></script>
-    <script>
-        function toggleLang() {
-            window.location.href = "{{ route('toggleLang') }}";
-        }
-    </script>
-  </body>
-</html>
+    
+@endsection

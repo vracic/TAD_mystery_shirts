@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("size");
+            $table->string("nations");
             $table->unsignedBigInteger('order_id')->nullable(true);
             $table->unsignedBigInteger('package_id')->nullable(true);
             $table->foreign('order_id')->references('id')->on('orders')->nullOnDelete();

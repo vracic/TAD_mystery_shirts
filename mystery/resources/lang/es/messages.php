@@ -39,5 +39,8 @@ return [
     'subscribeTo' => 'Suscríbete a nuestro boletín',
     'news' => 'Reciba las últimas noticias y ofertas de Mystery Football Shirt Box directamente en su bandeja de entrada.',
     'subscribe' => 'Suscribir',
+    'addToCart' => 'añadir a la cesta',
+    'nations' => 'naciones a evitar',
+    'cart' => 'carro',
 
 ];

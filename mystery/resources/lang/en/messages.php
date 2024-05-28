@@ -39,5 +39,7 @@ return [
     'subscribeTo' => 'Subscribe to our newsletter',
     'news' => 'Get the latest news and offers from Mystery Football Shirt Box delivered straight to your inbox.',
     'subscribe' => 'Subscribe',
-
+    'addToCart' => 'add to cart',
+    'nations' => 'nations to avoid',
+    'cart' => 'cart',
 ];

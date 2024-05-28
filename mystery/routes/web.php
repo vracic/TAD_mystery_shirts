@@ -13,24 +13,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('toggleLang', function () {
-    $currentLocale = Session::get('locale');
-    $newLocale = $currentLocale === 'en' ? 'es' : 'en';
-    App::setLocale($newLocale);
-    Session::put('locale', $newLocale);
-
-    $packages = Package::all();
-    return view('index', compact('packages'));
-})->name('toggleLang');
-
-Route::get('/home', [PackagesController::class, 'index'])->name('packages.index');
-Route::get('/packages/{id}', [PackagesController::class, 'show'])->name('packages.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('toggleLang', function () {
+        $currentLocale = Session::get('locale');
+        $newLocale = $currentLocale === 'en' ? 'es' : 'en';
+        App::setLocale($newLocale);
+        Session::put('locale', $newLocale);
+    
+        $packages = Package::all();
+        return view('index', compact('packages'));
+    })->name('toggleLang');
+    
+    Route::get('/home', [PackagesController::class, 'index'])->name('packages.index');
+    Route::get('/packages/{id}', [PackagesController::class, 'show'])->name('packages.show');
 
     
     Route::get('cart', [CartsController::class, 'index'])->name('cart.index');
-    Route::post('cart', [CartsController::class, 'store'])->name('cart.store');
+    Route::post('cart/store', [CartsController::class, 'store'])->name('cart.store');
     Route::get('/cart/remove/{index}', [CartsController::class, 'removeItem'])->name('cart.remove');
     Route::post('/cart/checkout', [CartsController::class, 'checkout'])->name('cart.checkout');
 
