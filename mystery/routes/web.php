@@ -6,6 +6,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\UsersController;
 use App\Models\Package;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -20,8 +21,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         App::setLocale($newLocale);
         Session::put('locale', $newLocale);
     
+        $user = User::findOrFail(auth()->id());
         $packages = Package::all();
-        return view('index', compact('packages'));
+        return view('index', compact('packages', 'user'));
     })->name('toggleLang');
     
     Route::get('/home', [PackagesController::class, 'index'])->name('packages.index');
@@ -48,9 +50,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::put('packages/edit/{id}', [ PackagesController::class, 'update' ]) -> name('packages.update');
     Route::delete('packages/delete/{id}', [ PackagesController::class, 'delete' ]) -> name('packages.delete');
     
-    Route::get('/orders', [OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/orders', [AdminController::class, 'allOrders'])->name('orders.index');
     Route::get('/orders/unsent', [OrdersController::class, 'unsentOrders'])->name('orders.unsent');
-    Route::post('/orders/{order}/send', [OrdersController::class, 'sendOrder'])->name('orders.send');
+    Route::post('/orders/{order_id}/send', [OrdersController::class, 'sendOrder'])->name('orders.send');
    
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 });

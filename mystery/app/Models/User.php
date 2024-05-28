@@ -50,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Package::class, 'favorites')->withTimestamps();
     }
 
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
     public function isAdmin()
     {
         return $this->role === 'admin';

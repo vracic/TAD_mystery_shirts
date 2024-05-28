@@ -20,7 +20,7 @@
 
                         <form action="{{ route('cart.remove', ['index' => $index]) }}" method="POST">
                             @csrf   
-                            <button type="submit">Remove</button>
+                            <button class="showBoxesBtn" type="submit">Remove</button>
                         </form>
                     </tc>
                 </tr>
@@ -34,11 +34,17 @@
     <p>Total price: {{ $total_price }} </p>
     
     <form action="{{ route('cart.checkout') }}" method="POST">
-        @csrf
-        <input type="text" name="address" placeholder="Address">
-        <button type="submit">Checkout</button>
-    </form>
-      </div>
+    @csrf
+ 
+    <div class="col-md-10 offset-md-2"> <!-- Clases ajustadas aquí -->
+        <div class="input-group mb-3">
+            <input type="text"  class="form-control" name="address" placeholder="Address">
+            <button type="submit" class="showBoxesBtn">Checkout</button>
+        </div>
+    </div>
+</form>.
+
+
     </section>
 
     <main>

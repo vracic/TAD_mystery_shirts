@@ -41,8 +41,12 @@
                 </div>
             </div>
 
-            <div id="modal-{{ $package->id }}" class="modal">
-                <div class="modal-content">
+
+
+
+
+            <!--<div id="modal-{{ $package->id }}" class="modal fade">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <span class="close" data-modal-id="modal-{{ $package->id }}">&times;</span>
                     <div class="modal-body">
                         <h3 class="mb-2 lead fw-bold">{{ app()->getLocale() === 'en' ? $package->name_en : $package->name_es }}</h3>
@@ -67,7 +71,40 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+
+
+                <!-- Modal -->
+             <div id="modal-{{ $package->id }}" class="modal"  tabindex="-1" role="dialog" aria-labelledby="modal-{{ $package->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-shadow" role="document">
+                    <div class="modal-content ">
+                    <div class="modal-body">
+                    <h3 class="mb-2 lead fw-bold">{{ app()->getLocale() === 'en' ? $package->name_en : $package->name_es }}</h3>
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            @csrf {{-- Cláusula para obtener un token de formulario al enviarlo --}}
+                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                            <div class="form-group">
+                                <label for="size">Size</label>
+                                <select id="size" name="size" class="form-control">
+                                    <option>Select</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nations">@lang('messages.nations')</label>
+                                <input type="text" name="nations" class="form-control"></input>
+                            </div>
+                            <button type="submit" class="btn btn-primary">@lang('messages.addToCart')</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div> 
+
            @endforeach
 
           </div>
@@ -273,7 +310,7 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Enter your email">
-                        <button class="btn btn-primary" type="button">@lang('messages.subscribe')</button>
+                        <button onclick="alert('Thanks for subscribing!')" class="btn btn-primary" type="button">@lang('messages.subscribe')</button>
                     </div>
                 </div>
             </form>

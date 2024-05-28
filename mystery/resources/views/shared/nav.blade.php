@@ -42,9 +42,10 @@
                   <a class="nav-link {{ request()->routeIs('cart.index') ? 'active' : '' }}" href="{{ route('cart.index') }}">@lang('messages.cart')</a>
                   <a class="nav-link" href="#" onclick="toggleLang()">@lang('messages.lang') </a>
                   <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       {{ Auth::user()->name }}
-                    </button>
+                    </button> -->
+                    <img   src="/img/profile.png" alt="{{ Auth::user()->name }}" class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="width: 2em">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                       <li>
                           <a class="dropdown-item" href="{{ route('users.show') }}">{{ __('My Profile') }}</a>

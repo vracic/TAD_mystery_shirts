@@ -28,7 +28,13 @@
     }
   }
  
-
+  .modal-shadow {
+    
+    height: 100% !important;
+    width: 100% !important;
+    background-color: #212529d4;
+    z-index: -1;
+  }
   .hero-shadow {
     position: absolute;
     top: 0;
@@ -46,6 +52,24 @@
     font-size: 2.4rem;
     text-transform: uppercase;
     font-weight: bolder;
+  }
+
+  .showBoxesBtn{
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(105, 45, 133);
+    padding: 1em 2em;
+    border-radius: 12px;
+  }
+
+  .showBoxesBtn:hover{
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    color: rgb(79, 13, 105);
+    background-color: rgb(209, 198, 198);
+    padding: 1em 2em;
+    border-radius: 8px;
   }
 
   .nav-link,
@@ -270,6 +294,9 @@
     color: rgb(255, 102, 0);
   }
  
+  .centerLeftCard{
+    text-align:left;
+  }
 
 .text-info{
   color: rgb(105, 45, 133) !important;
@@ -281,6 +308,12 @@
   color:  rgb(165 139 178) !important;
   font-weight: bold;
   font-size: 1.5em;
+}
+
+.purpleTitle{
+  color:  rgb(165 139 178) !important;
+  font-weight: bold;
+  font-size: 3em;
 }
 
 /* Cambiar el color del ícono del botón de hamburguesa a blanco */

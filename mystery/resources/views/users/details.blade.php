@@ -3,7 +3,7 @@
 
 <section id="home" class="home">
       <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-light text-center">
-        <div class="display-1">Your details</div>
+        <div class="display-1 purpleTitle">Your details</div>
 
         <div class="hero-shadow"></div>
 
@@ -44,8 +44,10 @@
         
     </section>
     
-    <h3>Your favorites</h3>
-    @foreach ($packages as $package)
+    <div class="container py-5 ">
+        <div class="row text-center">
+              <h1 class="purpleText">Your favorites</h1>
+          @foreach ($packages as $package)
     <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
         <div class="p-6 bg-light-light">
             <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
@@ -67,43 +69,47 @@
         </div>
     </div>
     @endforeach
+    </div>
+    </div>
+
 
     <br>
     <br>
-
-    <h3>Your orders</h3>
-    @foreach ($orders as $order)
-    <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
-        <div class="p-6 bg-light-light">
-            <a class="link-dark text-decoration-none d-block px-6 mt-6 mb-2" href="#">
-                <p>Date: {{ $order->created_at }} </p>
-                <p>Sent: {{ $order->sent == 1 ? 'Yes' : 'No' }}</p>
-                <p>Items: 
-                @foreach (json_decode($order->items, true) as $item)
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Size</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (json_decode($order->items, true) as $item)
-                        <tr>
-                            <td>{{ isset($item['name_en']) ? $item['name_en'] : 'N/A' }}</td>
-                            <td>{{ isset($item['size']) ? $item['size'] : 'N/A' }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                <hr>
-                @endforeach
-                </p>
-
-            </a>
+    
+    
+    <div class="container py-5">¸
+        <div class="row text-center">
+            <h1 class="purpleText">Your orders</h1>
+            @foreach ($orders as $order)
+                <div class="col-12 col-sm-6 col-md-4 px-3 mb-8">
+                <div class="card" style="width: 40rem;">
+                    <div class="card-body">
+                        <div class="p-6 bg-light-light">
+                            <p class="centerLeftCard"><strong>Date:</strong> {{ $order->created_at }} </p>
+                            <p class="centerLeftCard"><strong>Sent:</strong> {{ $order->sent == 1 ? 'Yes' : 'No' }}</p>
+                                <table>
+                                    <thead> 
+                                        <tr>
+                                            <th class="centerLeftCard">Name</th>
+                                            <th class="centerLeftCard">Size</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (json_decode($order->items, true) as $item)
+                                        <tr>
+                                            <td>{{ isset($item['name_en']) ? $item['name_en'] : 'N/A' }}</td>
+                                            <td>{{ isset($item['size']) ? $item['size'] : 'N/A' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            @endforeach
         </div>
     </div>
-    @endforeach
 
 
 @endsection
