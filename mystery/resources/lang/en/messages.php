@@ -18,7 +18,7 @@ return [
     'browse2' => " that's right for you.",
     'yourOrder' => 'YOUR ORDER',
     'select1' => 'Select your jersey size and',
-    'selectStrong' => "us know any teams or nations you'd like to avoid",
+    'selectStrong' => " let us know any teams or nations you'd like to avoid",
     'select2' => ' and complete your purchase.',
     'get' => 'GET YOUR SHIRT',
     'simple' => 'It really is that simple! We will send you the box ',

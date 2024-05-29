@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'nav_home' => 'HOGAR',
+    'nav_home' => 'INICIO',
     'nav_boxes' => 'CAJAS',
     'nav_hiw' => 'CÓMO FUNCIONA',
     'about' => 'SOBRE NOSOTROS',
@@ -18,7 +18,7 @@ return [
     'browse2' => " eso es adecuado para ti.",
     'yourOrder' => 'SU PEDIDO',
     'select1' => 'Selecciona tu talla de camiseta y ',
-    'selectStrong' => "Nosotros sabemos cuales equipos o naciones te gustaría evitar",
+    'selectStrong' => "Háznos saber cuales equipos o naciones te gustaría evitar",
     'select2' => ' y completa tu compra.',
     'get' => 'CONSIGUE TU CAMISA',
     'simple' => '¡Es realmente así de simple! Te enviaremos la caja',
@@ -41,7 +41,7 @@ return [
     'subscribe' => 'Suscribir',
     'addToCart' => 'añadir a la cesta',
     'nations' => 'naciones a evitar',
-    'cart' => 'carro',
+    'cart' => 'carrito',
     'myProfile' => 'Mi perfil',
 
 ];
