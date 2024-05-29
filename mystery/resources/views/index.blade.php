@@ -284,32 +284,5 @@
     </section>
 
     </main>
-
-    <script>
-        function toggleFavorite(packageId) {
-            const url = `/users/${packageId}`;
-            const token = '{{ csrf_token() }}';
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const button = document.getElementById(`toggle-favorite-btn-${packageId}`);
-                if (data.isFavorite) {
-                    button.classList.remove('not-favorite');
-                    button.classList.add('favorite');
-                } else {
-                    button.classList.remove('favorite');
-                    button.classList.add('not-favorite');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
-    </script>
     
 @endsection

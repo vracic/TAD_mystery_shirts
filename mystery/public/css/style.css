@@ -27,6 +27,20 @@
       scroll-margin-top: 69px;
     }
   }
+
+  .favorite {
+    color: red;
+  }
+  .not-favorite {
+      color: black;
+  }
+  th {
+      padding-right: 20px; /* Adjust as needed */
+  }
+
+  td {
+      padding-right: 20px; /* Adjust as needed */
+  }
  
   .modal-shadow {
     

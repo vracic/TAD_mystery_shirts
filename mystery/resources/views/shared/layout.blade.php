@@ -22,21 +22,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <style>
-        .favorite {
-            color: red;
-        }
-        .not-favorite {
-            color: black;
-        }
-        th {
-            padding-right: 20px; /* Adjust as needed */
-        }
-
-        td {
-            padding-right: 20px; /* Adjust as needed */
-        }
-    </style>
   </head>
   
   <!--habilitar la funcionalidad de espionaje de navegación-->
@@ -93,7 +78,7 @@
                 event.target.style.display = "none";
             }
         }
-    });
+        });
     </script>
         
         <script>
