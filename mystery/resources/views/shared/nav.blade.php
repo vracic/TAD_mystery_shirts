@@ -41,6 +41,7 @@
                   <a class="nav-link {{ request()->routeIs('packages.index') || request()->routeIs('other.home.routes') ? 'active' : '' }}" href="{{ route('packages.index') }}">@lang('messages.nav_home')</a>
                   <a class="nav-link {{ request()->routeIs('cart.index') ? 'active' : '' }}" href="{{ route('cart.index') }}">@lang('messages.cart')</a>
                   <a class="nav-link" href="#" onclick="toggleLang()">@lang('messages.lang') </a>
+                  
                   <div class="dropdown">
                     <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       {{ Auth::user()->name }}

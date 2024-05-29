@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::post('packages', [PackagesController::class,'crear'])->name('packages.create');
+    Route::post('packages', [PackagesController::class,'create'])->name('packages.create');
     Route::get('packages/edit/{id}', [ PackagesController::class, 'edit' ]) -> name('packages.edit'); 
     Route::put('packages/edit/{id}', [ PackagesController::class, 'update' ]) -> name('packages.update');
     Route::delete('packages/delete/{id}', [ PackagesController::class, 'delete' ]) -> name('packages.delete');

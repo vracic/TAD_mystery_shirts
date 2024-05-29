@@ -50,7 +50,8 @@ class PackagesController extends Controller
         $package-> type_es = $request->type_es;
         $package-> name_es = $request->name_es;
         $package-> price = $request->price;
-        return redirect()->to('/packages')->with('message','Package edited successfully!');
+        $package->save();
+        return back()->with('message','Package edited successfully!');
     }
 
     public function delete($id) {
