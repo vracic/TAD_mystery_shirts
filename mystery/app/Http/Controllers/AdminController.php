@@ -24,6 +24,7 @@ class AdminController extends Controller
         $orders = Order::all();
         $users = User::all();
         $favorites = FavoriteView::all();
-        return view('admin.index', compact('orders', 'users', 'favorites'));
+        $packages = Package::all();
+        return view('admin.index', compact('orders', 'users', 'favorites', 'packages'));
     }
 }

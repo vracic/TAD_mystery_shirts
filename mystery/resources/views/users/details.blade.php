@@ -58,9 +58,9 @@
                 $isFavorite = $user->favorites->contains($package->id);
                 @endphp
 
-                <button id="toggle-favorite-btn-{{ $package->id }}" class="btn {{ $isFavorite ? 'favorite' : 'not-favorite' }}" title="{{ $isFavorite ? 'Remove from favorites' : 'Add to favorites' }}" onclick="toggleFavorite({{ $package->id }})">
+                <a id="toggle-favorite-btn-{{ $package->id }}" class="btn {{ $isFavorite ? 'favorite' : 'not-favorite' }}" title="{{ $isFavorite ? 'Remove from favorites' : 'Add to favorites' }}" onclick="toggleFavorite({{ $package->id }})">
                     &#x2764;
-                </button>
+                </a>
 
                 <p class="h6 text-info">
                     <span class="small text-secondary">${{ number_format($package->price, 2) }}</span>

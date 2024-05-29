@@ -29,9 +29,9 @@
                             $isFavorite = $user->favorites->contains($package->id);
                         @endphp
 
-                        <button id="toggle-favorite-btn-{{ $package->id }}" class="btn {{ $isFavorite ? 'favorite' : 'not-favorite' }}" title="{{ $isFavorite ? 'Remove from favorites' : 'Add to favorites' }}" onclick="toggleFavorite({{ $package->id }})">
+                        <a id="toggle-favorite-btn-{{ $package->id }}" class="btn {{ $isFavorite ? 'favorite' : 'not-favorite' }}" title="{{ $isFavorite ? 'Remove from favorites' : 'Add to favorites' }}" onclick="toggleFavorite({{ $package->id }})">
                             &#x2764; 
-                        </button>
+                        </a>
 
                         <p class="h6 text-info">
                             <span class="small text-secondary">${{ number_format($package->price, 2) }}</span>
@@ -41,41 +41,6 @@
                 </div>
             </div>
 
-
-
-
-
-            <!--<div id="modal-{{ $package->id }}" class="modal fade">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <span class="close" data-modal-id="modal-{{ $package->id }}">&times;</span>
-                    <div class="modal-body">
-                        <h3 class="mb-2 lead fw-bold">{{ app()->getLocale() === 'en' ? $package->name_en : $package->name_es }}</h3>
-                        <form action="{{ route('cart.store') }}" method="POST">
-                            @csrf {{-- Cláusula para obtener un token de formulario al enviarlo --}}
-                            <input type="hidden" name="package_id" value="{{$package->id}}">
-                            <div class="form-group">
-                                <label for="size">Size</label>
-                                <select id="size" name="size" class="form-control">
-                                    <option>Select</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="nations">@lang('messages.nations')</label>
-                                <input type="text" name="nations" class="form-control"></input>
-                            </div>
-                            <button type="submit" class="btn btn-primary">@lang('messages.addToCart')</button>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
-
-
-
-                <!-- Modal -->
              <div id="modal-{{ $package->id }}" class="modal"  tabindex="-1" role="dialog" aria-labelledby="modal-{{ $package->id }}" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-shadow" role="document">
                     <div class="modal-content ">

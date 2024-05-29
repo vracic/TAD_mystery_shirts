@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         DB::statement('CREATE VIEW favorites_view AS 
-                        SELECT packages.id, packages.name_en, packages.type_en, count(user_id) as count 
-                        FROM packages left join favorites on packages.id = favorites.id
+                        SELECT packages.id, packages.name_en, packages.type_en, count(user_id) as favorites_count 
+                        FROM packages left join favorites on packages.id = favorites.package_id
                         GROUP BY packages.id, packages.name_en, packages.type_en
-                        ORDER BY count desc');
+                        ORDER BY favorites_count desc');
     }
 
     /**

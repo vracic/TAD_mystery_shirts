@@ -110,7 +110,7 @@
                     <tr>
                         <td>{{ $fav->id }}</td>
                         <td>{{ $fav->type_en }}</td>
-                        <td>{{ $fav->count }}</td>
+                        <td>{{ $fav->favorites_count }}</td>
                     </tr>
                 @endforeach
             </tbody>
